@@ -1,4 +1,4 @@
-const models = require('../app/models');
+const models = require('../models');
 const express = require('express');
 let router = express.Router();
 
