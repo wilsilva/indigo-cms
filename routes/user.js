@@ -1,12 +1,54 @@
 const models = require('../models');
 const express = require('express');
+const jwt    = require('jsonwebtoken');
+const config = require('../config');
+const authMiddleware = require('../middlewares/auth');
+
 let router = express.Router();
+
+router.post('/authenticate', function(req,res,next){
+
+    let credentials = req.body.user;
+
+    models.user.findOne({ 
+        where: {
+            email: credentials.email
+        }
+    }).then((user) => {
+
+        if(!user){
+            res.status(401).json({ error : 'Authentication failed. User not found.'});
+        }else if(user){
+            if(user.password != credentials.password){
+                res.status(401).json({ error : 'Authentication failed. Wrong password.'});
+            }else{
+
+                let token = jwt.sign(user.dataValues,config.tokenSecret,{
+                            expiresIn: 86400 // expires in 24 hours
+                        });
+
+                res.status(200).json({
+                    token: token
+                });
+            }
+        }
+
+    }).catch((error) => {
+        res.status(406).json({            
+            'error': error.message,
+        });    
+    });
+
+});
+
+router.use(authMiddleware);
 
 router.get('/',function(req,res,next){
     models.user.findAll().then((users) => {
         res.status(200).json(users);        
     });
 });
+
 
 router.get('/:idUser',function(req,res,next){
     models.user.findById(req.params.idUser).then((user) => {
@@ -25,7 +67,7 @@ router.get('/:idUser',function(req,res,next){
 
 router.post('/create',function(req,res,next){
    
-   let user = req.body;
+   let user = req.body.user;
    models.user.create(user).then((user) => {
         res.status(201).json(user);
    }).catch((error) => {
@@ -40,7 +82,7 @@ router.put('/update/:idUser',function (req,res,next){
     
     models.user.findById(req.params.idUser).then((user) => {
 
-        user.update(req.body,{
+        user.update(req.body.user,{
             fields: [
                 'name',
                 'email',

@@ -1,5 +1,5 @@
 'use strict'
-const config = require('./config/env');
+const config = require('./config');
 const models = require('./models');
 const express = require('express');
 const bodyParser = require('body-parser');

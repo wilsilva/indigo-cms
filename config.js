@@ -7,4 +7,5 @@ module.exports = {
         password: 'root',
     },
     http_port: 3000,
+    tokenSecret: '12345678',
 }
