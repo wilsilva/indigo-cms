@@ -5,7 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const indexRouter = require('./routes/index');
-const postRouter = require('./routes/post');
+const articleRouter = require('./routes/article');
 const userRouter = require('./routes/user');
 
 let app = express();
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 // URL root: /api
 app.use('/api/',indexRouter);
 app.use('/api/users',userRouter);
-app.use('/api/posts/',postRouter);
+app.use('/api/article/',articleRouter);
 
 models.sequelize.sync().then(() => {
     let server = app.listen(app.get('port'),function(){

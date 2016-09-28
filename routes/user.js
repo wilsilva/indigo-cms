@@ -41,16 +41,14 @@ router.post('/authenticate', function(req,res,next){
 
 });
 
-router.use(authMiddleware);
-
-router.get('/',function(req,res,next){
+router.get('/',authMiddleware,function(req,res,next){
     models.user.findAll().then((users) => {
         res.status(200).json(users);        
     });
 });
 
 
-router.get('/:idUser',function(req,res,next){
+router.get('/:idUser',authMiddleware,function(req,res,next){
     models.user.findById(req.params.idUser).then((user) => {
         
         if(user){
@@ -65,7 +63,7 @@ router.get('/:idUser',function(req,res,next){
     });
 });
 
-router.post('/create',function(req,res,next){
+router.post('/create',authMiddleware,function(req,res,next){
    
    let user = req.body.user;
    models.user.create(user).then((user) => {
@@ -78,7 +76,7 @@ router.post('/create',function(req,res,next){
 
 });
 
-router.put('/update/:idUser',function (req,res,next){
+router.put('/update/:idUser',authMiddleware,function (req,res,next){
     
     models.user.findById(req.params.idUser).then((user) => {
 
@@ -102,7 +100,7 @@ router.put('/update/:idUser',function (req,res,next){
     });
 });
 
-router.delete('/delete/:idUser',function (req,res,next){
+router.delete('/delete/:idUser',authMiddleware,function (req,res,next){
     
     models.user.findById(req.params.idUser).then((user) => {
 
