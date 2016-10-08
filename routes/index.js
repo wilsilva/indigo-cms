@@ -1,10 +1,10 @@
-const models = require('../models');
+'use strict'
+
 const express = require('express');
-let router = express.Router();
 
+const AuthController = require('../controllers/AuthController');
+const Router = express.Router();
 
-router.get('/',function(req,res){
-    res.send('Welcome Indigo CMS');
-});
+Router.post('/authenticate', AuthController.authenticate);
 
-module.exports = router;
+module.exports = Router;

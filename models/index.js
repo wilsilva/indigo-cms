@@ -13,7 +13,7 @@ fs
     return (file.indexOf(".") !== 0) && (file !== "index.js");
   })
   .forEach(function(file) {
-    let model = sequelize["import"](path.join(__dirname, file));
+    let model = sequelize["import"](path.join(__dirname, file));    
     db[model.name] = model;
   });
 

@@ -1,10 +1,9 @@
-const models = require('../models');
 const express = require('express');
-const authMiddleware = require('../middlewares/auth');
-let router = express.Router();
 
-router.get('/',authMiddleware,function(req,res){
-    res.json({text: 'List posts CMS' });
-});
+const AuthMiddleware = require('../middlewares/AuthMiddleware');
+const Router = express.Router();
+const ArticleController = require('../controllers/ArticleController');
 
-module.exports = router;
+Router.get('/',AuthMiddleware.validate, ArticleController.list);
+
+module.exports = Router;
