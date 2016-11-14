@@ -1,7 +1,7 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'start' ]
-2 info using npm@3.10.3
-3 info using node@v6.7.0
+2 info using npm@4.0.2
+3 info using node@v6.9.1
 4 verbose stack Error: Failed to parse json
 4 verbose stack Trailing comma in object at 10:3
 4 verbose stack   },
@@ -13,10 +13,10 @@
 4 verbose stack     at tryToString (fs.js:455:3)
 4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:442:12)
 5 verbose cwd /home/williamsilva/Development/nodejs/indigo-cms
-6 error Linux 4.4.0-21-generic
+6 error Linux 4.4.0-47-generic
 7 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
-8 error node v6.7.0
-9 error npm  v3.10.3
+8 error node v6.9.1
+9 error npm  v4.0.2
 10 error file /home/williamsilva/Development/nodejs/indigo-cms/package.json
 11 error code EJSONPARSE
 12 error Failed to parse json
